@@ -1,26 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
+import React , { useEffect } from 'react';
+import { connect } from "react-redux";
 import './App.css';
+import './ListItem'
+import ListItem from './ListItem';
+import List from './List'
+import { filter } from "./actions";
 
-function App() {
+function App(props) {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="inputContainer">
+        <input className="input" onChange={(e) => props.filter(e.target.value)}/>
+      </div>
+      <div className="wrapper">
+        <div>
+          <div className="title">favourite</div>
+          <List list={props.fav}/>
+        </div>
+        <div>
+          <div className="title">listened</div>
+
+          <List list={props.listen}/>
+        </div>
+        <div>
+          <div className="title">all</div>
+
+          <List list={props.all}/>
+        </div>
+      </div>
     </div>
+
   );
 }
-
-export default App;
+const mapStateToProps = state => {
+  
+  let all = [...state.all.filter(song => {
+    if(state.filter.length == 0)return true;
+    else return(song.artist.toUpperCase().includes(state.filter.toUpperCase()) || song.track.toUpperCase().includes(state.filter.toUpperCase()))
+  })];
+  if(state.filter.length == 0) all = [...state.all]
+  const fav = all.filter(song => song.favourite)
+  const listen = all.filter(song => song.listened)
+  return {all, fav, listen};
+};
+const mapDispatchToProps = dispatch => ({
+  filter: text => dispatch(filter(text)),
+})
+export default connect(mapStateToProps, mapDispatchToProps)(App);

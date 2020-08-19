@@ -1,0 +1,28 @@
+.item{
+    min-width: 300px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    background-color: ivory;
+}
+.top{
+    display: flex;
+}
+.artist{
+    flex-grow: 1;
+    font-weight: bold;
+    font-size: 14px;
+}
+.track{
+    color:gray;
+    font-size: 12px;
+}
+.red{
+    color:red;
+}
+.gray{
+    color:gray
+}
+.green{
+    color:green
+}

@@ -1,7 +1,28 @@
 .App {
-  text-align: center;
+  background-color: indigo;
 }
-
+.title{
+  color:white;
+  font-size: 18px;
+  min-width: 300px;
+  margin-bottom: 20px;
+}
+.wrapper {
+  display: flex;
+  justify-content: space-around;
+}
+.inputContainer{
+  width: 100%;
+  text-align: right;
+}
+.input{
+  background-color: white;
+  height: 30px;
+  width: 300px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
